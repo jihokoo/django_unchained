@@ -4,14 +4,14 @@ class Factory(models.Model):
   name = models.CharField(max_length=50)
   email = models.CharField(max_length=50)
   address = models.ForeignKey("Address")
-  tags = models.ManyToManyField("Tag")
+  tags = models.ManyToManyField("Tag", blank=True)
 
   def __str__(self):
     return self.name
 
 class Address(models.Model):
   line_1 = models.CharField(max_length=50)
-  line_2 = models.CharField(max_length=50)
+  line_2 = models.CharField(max_length=50, blank=True)
   city = models.CharField(max_length=50)
   state = models.CharField(max_length=2)
   zipcode = models.CharField(max_length=5)
