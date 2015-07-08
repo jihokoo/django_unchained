@@ -1,0 +1,9 @@
+{% if latest_factory_list %}
+    <ul>
+    {% for factory in latest_factory_list %}
+        <li><a href="/polls/{{ factory.id }}/">{{ factory.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No factories are available.</p>
+{% endif %}
