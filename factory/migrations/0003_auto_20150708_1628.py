@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('crud', '0002_auto_20150708_1541'),
+        ('factory', '0002_auto_20150708_1541'),
     ]
 
     operations = [
@@ -19,6 +19,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='factory',
             name='tags',
-            field=models.ManyToManyField(to='crud.Tag', blank=True),
+            field=models.ManyToManyField(to='factory.Tag', blank=True),
         ),
     ]
