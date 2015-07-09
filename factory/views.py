@@ -19,3 +19,11 @@ def new (request):
 def create (request):
   return HttpResponseRedirect(reverse('factory:index'))
 
+def edit (request, factory_id):
+  factory = get_object_or_404(Factory, id=factory_id)
+  return render(request, 'factory/edit.html', {'factory': factory})
+
+def update (request, factory_id):
+  factory = get_object_or_404(Factory, id=factory_id)
+  return HttpResponseRedirect(reverse('factory:index', args=(factory,)))
+

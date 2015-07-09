@@ -1,0 +1,14 @@
+<h1>{{ factory.name }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'factory:update' %}" method="post">
+
+{% csrf_token %}
+<input type="text" name="name" id="name" value="{{ factory.name }}" />
+<label for="name">Name</label><br />
+<input type="text" name="email" id="email" value="{{ factory.email }}" />
+<label for="email">Email</label><br />
+<input type="submit" value="Update" />
+
+</form>
