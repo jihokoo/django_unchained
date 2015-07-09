@@ -1,7 +1,7 @@
 {% if latest_factory_list %}
     <ul>
     {% for factory in latest_factory_list %}
-        <li><a href="/polls/{{ factory.id }}/">{{ factory.name }}</a></li>
+        <li><a href="{% url 'factory:show' factory.id %}">{{ factory.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
