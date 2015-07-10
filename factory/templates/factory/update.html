@@ -1,0 +1,26 @@
+<h1><a href="{% url 'factory:showAll' %}">{{ factory.name }}</a></h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'factory:update' factory.id %}" method="post">
+
+  {% csrf_token %}
+  <input type="text" name="name" id="name" value="{{ factory.name }}" />
+  <label for="name">Name</label><br />
+  <input type="text" name="email" id="email" value="{{ factory.email }}" />
+  <label for="email">Email</label><br />
+
+  <h4>Address</h4>
+  <input type="text" name="line_1" id="line_1" value="{{ factory.address.line_1 }}" />
+  <label for="line_1">Line 1</label><br />
+  <input type="text" name="line_2" id="line_2" value="{{ factory.address.line_2 }}" />
+  <label for="line_2">Line 2</label><br />
+  <input type="text" name="city" id="city" value="{{ factory.address.city }}" />
+  <label for="city">City</label><br />
+  <input type="text" name="state" id="state" value="{{ factory.address.state }}" />
+  <label for="state">State</label><br />
+  <input type="text" name="zipcode" id="zipcode" value="{{ factory.address.zipcode }}" />
+  <label for="zipcode">Zipcode</label><br />
+
+  <input type="submit" value="Update" />
+</form>

@@ -1,0 +1,26 @@
+<h1>Create a New Factory</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'factory:create' %}" method="post">
+
+  {% csrf_token %}
+  <input type="text" name="name" id="name"/>
+  <label for="name">Name</label><br />
+  <input type="text" name="email" id="email"/>
+  <label for="email">Email</label><br />
+
+  <h4>Address</h4>
+  <input type="text" name="line_1" id="line_1"/>
+  <label for="line_1">Line 1</label><br />
+  <input type="text" name="line_2" id="line_2"/>
+  <label for="line_2">Line 2</label><br />
+  <input type="text" name="city" id="city"/>
+  <label for="city">City</label><br />
+  <input type="text" name="state" id="state"/>
+  <label for="state">State</label><br />
+  <input type="text" name="zipcode" id="zipcode"/>
+  <label for="zipcode">Zipcode</label><br />
+
+  <input type="submit" value="Create" />
+</form>
