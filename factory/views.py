@@ -2,8 +2,9 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse
 
 from django.core.urlresolvers import reverse
+from django.db import IntegrityError
 
-from .models import Factory, Address
+from .models import Factory, Address, Tag
 
 def showAll (request):
   if request.method == 'GET':
@@ -37,6 +38,19 @@ def create (request):
     )
     factory.save()
 
+    tags = request.POST.get('tags', 0)
+    if tags != 0:
+      tags = tags.split(',')
+      for name in tags:
+        name = name.lower()
+        try:
+          tag = Tag(name=name)
+          tag.save()
+        except IntegrityError as e:
+          if 'unique constraint' in e.message.lower():
+            tag = Tag.objects.get(name=name)
+        factory.tags.add(tag)
+
     return HttpResponseRedirect(reverse('factory:showOne', args=(factory.id,)))
 
 def update (request, factory_id):
@@ -48,11 +62,27 @@ def update (request, factory_id):
 
     address = factory.address
     address.line_1 = request.POST["line_1"]
-    address.line_2 = request.POST["line_2"]
+    address.line_2 = request.POST.get('line_2', '')
     address.city = request.POST["city"]
     address.state = request.POST["state"]
     address.zipcode = request.POST["zipcode"]
     address.save()
+
+    tags = request.POST.get('tags', 0)
+    if tags != 0:
+      tags = tags.split(',')
+      for name in tags:
+        name = name.lower()
+        try:
+          tag = Tag(name = name)
+          tag.save()
+          factory.tags.add(tag)
+        except IntegrityError as e:
+          if 'unique constraint' in e.message.lower():
+            tag = Tag.objects.get(name = name)
+            for existing in factory.tags:
+              if (tags.index(existing.name) == -1):
+                factory.tags.add(tag)
 
     factory.name = request.POST["name"]
     factory.email = request.POST["email"]

@@ -9,6 +9,8 @@
   <label for="name">Name</label><br />
   <input type="text" name="email" id="email" value="{{ factory.email }}" />
   <label for="email">Email</label><br />
+  <textarea name="tags" id="tags">{{ factory.tags.all }}</textarea>
+  <label for="tags">Tags</label>
 
   <h4>Address</h4>
   <input type="text" name="line_1" id="line_1" value="{{ factory.address.line_1 }}" />
