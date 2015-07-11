@@ -9,7 +9,7 @@
   <label for="name">Name</label><br />
   <input type="text" name="email" id="email" value="{{ factory.email }}" />
   <label for="email">Email</label><br />
-  <textarea name="tags" id="tags">{{ factory.tags.all }}</textarea>
+  <textarea name="tags" id="tags">{{ factory.stringify_tags }}</textarea>
   <label for="tags">Tags</label>
 
   <h4>Address</h4>

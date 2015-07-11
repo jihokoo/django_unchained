@@ -9,6 +9,12 @@ class Factory(models.Model):
   def __str__(self):
     return self.name
 
+  def stringify_tags(self):
+    tags = []
+    for tag in self.tags.all():
+      tags.append(tag.name.encode('ascii', 'ignore'))
+    return ','.join(tags)
+
 class Address(models.Model):
   line_1 = models.CharField(max_length=50)
   line_2 = models.CharField(max_length=50, blank=True)
