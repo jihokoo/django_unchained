@@ -3,10 +3,13 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.core import serializers
 from django.core.exceptions import ObjectDoesNotExist
 
+from jsonview.decorators import json_view
+
 from utilities.services import factory_service
 
 import json
 
+@json_view
 def generic (request):
   if request.method == 'GET':
     factory_list = factory_service.getAll()
@@ -15,10 +18,11 @@ def generic (request):
     factory = factory_service.create(request.POST)
     json_data = serializers.serialize("json", [factory])
     struct = json.loads(json_data)
-    json_data = json.dumps(struct[0])
+    json_data = json.dumps(struct[0]) # unwrap from array
 
   return HttpResponse(json_data, content_type='application/json')
 
+@json_view
 def detail (request, factory_id):
   factory_id = factory_id.encode('ascii', 'ignore')
   try:
@@ -35,5 +39,5 @@ def detail (request, factory_id):
     raise Http404('Factory with id ' + factory_id + ' does not exist')
 
   struct = json.loads(json_data)
-  json_data = json.dumps(struct[0])
+  json_data = json.dumps(struct[0]) # unwrap from array
   return HttpResponse(json_data, content_type='application/json')
