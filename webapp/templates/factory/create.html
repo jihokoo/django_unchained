@@ -2,7 +2,7 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url 'factory:create' %}" method="post">
+<form action="{% url 'webapp:factory.create' %}" method="post">
 
   {% csrf_token %}
   <input type="text" name="name" id="name"/>
