@@ -26,7 +26,7 @@ def create (request):
   elif request.method == 'POST':
     factory = factory_service.create(request.POST)
 
-    return HttpResponseRedirect(reverse('factory:showOne', args=(factory.id,)))
+    return HttpResponseRedirect(reverse('webapp:factory.showOne', args=(factory.id,)))
 
 def update (request, factory_id):
   try:
@@ -35,14 +35,14 @@ def update (request, factory_id):
       return render(request, 'factory/update.html', {'factory': factory})
     elif request.method == 'POST':
       factory = factory_service.update(factory_id, request.POST)
-      return HttpResponseRedirect(reverse('factory:showOne', args=(factory.id,)))
+      return HttpResponseRedirect(reverse('webapp:factory.showOne', args=(factory.id,)))
   except ObjectDoesNotExist:
     raise Http404('Factory with id ' + factory_id + ' does not exist')
 
 def delete (request, factory_id):
   try:
     factory_service.delete(factory_id)
-    return HttpResponseRedirect(reverse('factory:showAll'))
+    return HttpResponseRedirect(reverse('webapp:factory.showAll'))
   except ObjectDoesNotExist:
     raise Http404('Factory with id ' + factory_id + ' does not exist')
 

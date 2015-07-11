@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 
-from factory.models import Factory, Address, Tag
+from ..models import Factory, Address, Tag
 
 def getAll ():
   latest_factory_list = Factory.objects.order_by('name')

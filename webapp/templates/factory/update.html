@@ -1,8 +1,8 @@
-<h1><a href="{% url 'factory:showAll' %}">{{ factory.name }}</a></h1>
+<h1><a href="{% url 'webapp:factory.showAll' %}">{{ factory.name }}</a></h1>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url 'factory:update' factory.id %}" method="post">
+<form action="{% url 'webapp:factory.update' factory.id %}" method="post">
 
   {% csrf_token %}
   <input type="text" name="name" id="name" value="{{ factory.name }}" />
