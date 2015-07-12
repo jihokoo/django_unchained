@@ -15,7 +15,7 @@ def generic (request):
     factory_list = factory_service.getAll()
     json_data = serializers.serialize("json", factory_list)
   elif request.method == 'POST':
-    factory = factory_service.create(request.POST)
+    factory = factory_service.create(request.POST.dict())
     json_data = serializers.serialize("json", [factory])
     struct = json.loads(json_data)
     json_data = json.dumps(struct[0]) # unwrap from array
@@ -30,7 +30,7 @@ def detail (request, factory_id):
       factory = factory_service.getOne(factory_id)
       json_data = serializers.serialize("json", [factory])
     elif request.method == 'PUT':
-      factory = factory_service.update(factory_id, request.POST)
+      factory = factory_service.update(factory_id, request.POST.dict())
       json_data = serializers.serialize("json", [factory])
     elif request.method == 'DELETE':
       factory_service.delete(factory_id)
