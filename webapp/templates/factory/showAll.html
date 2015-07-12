@@ -1,7 +1,7 @@
 <li><a href="{% url 'webapp:factory.create' %}">Create New Factory</a></li>
-{% if latest_factory_list %}
+{% if factory_list %}
     <ul>
-    {% for factory in latest_factory_list %}
+    {% for factory in factory_list %}
         <li><a href="{% url 'webapp:factory.showOne' factory.id %}">{{ factory.name }}</a></li>
     {% endfor %}
     </ul>

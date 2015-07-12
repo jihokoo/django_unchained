@@ -8,8 +8,8 @@ from utilities.services import factory_service
 
 def showAll (request):
   if request.method == 'GET':
-    latest_factory_list = factory_service.getAll()
-    context = {'latest_factory_list': latest_factory_list}
+    factory_list = factory_service.getAll()
+    context = {'factory_list': factory_list}
     return render(request, 'factory/showAll.html', context)
 
 def showOne (request, factory_id):
