@@ -44,5 +44,5 @@
 - `source bin/activate`
 - `cd django_unchained`
 - run tests: `python manage.py test`
-- `python manage.py runserver 0.0.0.0:7000`
+- run server: `python manage.py runserver 0.0.0.0:7000`
 - navigate to localhost:7000
