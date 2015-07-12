@@ -6,6 +6,21 @@ from ..models.tag import Tag
 
 from ..services import factory_service
 
+def create_factory():
+  a1 = Address.objects.create(
+    line_1 = '495 Ninth Ave',
+    line_2 = 'Apt 3C',
+    city = 'New York',
+    state = 'NY',
+    zipcode = '10018'
+  )
+  f1 = Factory.objects.create(
+    name = 'Makersrow',
+    email = 'makersrow@gmail.com',
+    address = a1,
+  )
+  return f1
+
 class FactoryServiceTests(TestCase):
 
   def setUp(self):
@@ -48,8 +63,9 @@ class FactoryServiceTests(TestCase):
     self.assertEqual(factory_list[1].name, 'Shoptiques')
 
   def test_get_one_factory(self):
-    factory = factory_service.getOne(1)
-    self.assertEqual(factory.name, 'Makersrow')
+    factory = create_factory()
+    returned_factory = factory_service.getOne(factory.id)
+    self.assertEqual(factory.name, returned_factory.name)
 
   def test_create_factory(self):
     factory = factory_service.create({
@@ -71,8 +87,9 @@ class FactoryServiceTests(TestCase):
     self.assertEqual(factory_list.count(), 3)
 
   def test_update_factory(self):
-    factory = factory_service.getOne(1)
-    self.assertEqual(factory.name, 'Makersrow')
+    factory = create_factory()
+    returned_factory = factory_service.getOne(factory.id)
+    self.assertEqual(factory.name, returned_factory.name)
 
     updated_factory = factory_service.update(factory.id, {
       "line_1": '140 E. 14th St.',
@@ -85,7 +102,7 @@ class FactoryServiceTests(TestCase):
     })
 
     factory_list = factory_service.getAll()
-    self.assertEqual(factory_list.count(), 2)
+    self.assertEqual(factory_list.count(), 3)
 
     self.assertEqual(factory.id, updated_factory.id)
     self.assertEqual(updated_factory.name, 'Palladium')

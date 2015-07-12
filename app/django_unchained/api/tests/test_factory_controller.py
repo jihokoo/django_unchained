@@ -121,5 +121,5 @@ class FactoryControllerTests(TestCase):
 
     def test_delete(self):
         factory = create_factory()
-        response = self.client.delete(reverse('api:factory.detail', args=(1,)), None, 'json')
+        response = self.client.delete(reverse('api:factory.detail', args=(factory.id,)), None, 'json')
         self.assertEqual(response.status_code, 204)
