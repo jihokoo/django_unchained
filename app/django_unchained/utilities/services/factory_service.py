@@ -17,7 +17,7 @@ def getOne (factory_id):
   except Factory.DoesNotExist:
     raise
 
-# factory_id: string, factory_data: QuerySet
+# factory_id: string, factory_data: dictionary
 def create (factory_data):
   address = Address(
     line_1 = factory_data['line_1'],
@@ -50,7 +50,7 @@ def create (factory_data):
 
   return factory
 
-# factory_id: string, factory_data: QuerySet
+# factory_id: string, factory_data: dictionary
 def update (factory_id, factory_data):
   try:
     factory = Factory.objects.get(id = factory_id)
